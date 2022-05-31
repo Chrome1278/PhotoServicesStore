@@ -58,17 +58,11 @@ def get_random_employee_code(branch_office_id):
     employee_code = session.execute(
         text(f"select employee_code from employee where branch_office_id = '{branch_office_id}'")
     ).all()
-    #all_offices = [item for sublist in q for item in sublist]
     return random.choice(employee_code)[0]
 
 
 def add_new_purchase(customer_id, employee_code, branch_office_id, purchase_amount):
     purchase_number = session.execute((text("select max(purchase_number) from purchase"))).fetchone()[0] + 1
-
-    # сначала создать строку Покупки, после нажатия на кнопку авторизаци и выбора филиала, а потом появляется всю остальное
-    # каждый объект корзины добавляется в таблицу services_list, и удаляется оттуда при удалении. И по триггерам общая сумма наполняется
-
-
     entry = Purchase(
         purchase_number=purchase_number,
         ##purchase_date,
