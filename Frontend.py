@@ -1,3 +1,5 @@
+import time
+
 import streamlit as st
 from src.Data_listing import all_services, all_offices, get_service_price, is_new_customer, add_new_customer, \
     get_customer_id, get_random_employee_code, get_branch_office_id, add_new_purchase
@@ -118,6 +120,9 @@ def app():
         if accept_purchase and branch_office:  # and other
             try:
                 add_new_purchase(customer_id, employee_code, branch_office_id, purchase_amount)
+                st.experimental_singleton.clear()
                 st.success(f"Заказ оформлен! Спасибо что выбрали нас, {full_name}!")
+                time.sleep(3)
+                st.experimental_rerun()
             except Exception as e:
                 st.error(f"Ошибка офорлмения заказа! Подробнее: {e}")
