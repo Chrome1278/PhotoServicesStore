@@ -79,3 +79,4 @@ def add_new_purchase(customer_id, employee_code, branch_office_id, purchase_amou
     )
     session.add(entry)
     session.commit()
+    
